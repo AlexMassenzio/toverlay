@@ -1,8 +1,15 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { io } from 'socket.io-client';
 
 	export let data: PageData;
 	const scoreboard = data.scoreboard;
+
+	const socket = io();
+
+	socket.on('eventFromServer', (message) => {
+		console.log(message);
+	});
 </script>
 
 <div class="text-center">
