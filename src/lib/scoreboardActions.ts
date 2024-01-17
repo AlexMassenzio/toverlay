@@ -9,7 +9,6 @@ export const storagePath = path.resolve(process.cwd(), fileName);
 export const updateScoreboard = async (newScoreboard: Scoreboard) => {
 	await fs.writeFile(storagePath, JSON.stringify(newScoreboard, null, 2), 'utf-8');
 	const scoreboard = await getScoreboard();
-	console.log(JSON.stringify(scoreboard));
 	return scoreboard;
 };
 

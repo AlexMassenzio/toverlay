@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { Scoreboard } from '$lib/types/scoreboard';
+	import { io } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 	let scoreboard: Scoreboard = data.scoreboard;
+	io.emit('message', scoreboard);
 </script>
 
 <form method="POST" class="flex flex-col">

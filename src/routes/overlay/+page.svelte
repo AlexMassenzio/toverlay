@@ -1,14 +1,13 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { io } from 'socket.io-client';
+	import { io } from '$lib/webSocketConnection';
 
 	export let data: PageData;
-	const scoreboard = data.scoreboard;
+	let scoreboard = data.scoreboard;
 
-	const socket = io();
-
-	socket.on('eventFromServer', (message) => {
-		console.log(message);
+	io.on('message', (wsScoreBoard) => {
+		console.log('something happened');
+		scoreboard = wsScoreBoard;
 	});
 </script>
 
