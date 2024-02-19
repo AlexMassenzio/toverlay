@@ -7,8 +7,14 @@ describe('updateScoreboard', () => {
 	it('should update and return all values', async () => {
 		const expected: Scoreboard = {
 			round: crypto.randomUUID(),
-			player1: crypto.randomUUID(),
-			player2: crypto.randomUUID(),
+			player1: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
+			player2: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
 			event: crypto.randomUUID(),
 			game: crypto.randomUUID()
 		};
@@ -22,8 +28,14 @@ describe('getScoreboard', () => {
 	it('should return a scoreboard', async () => {
 		const expected: Scoreboard = {
 			round: crypto.randomUUID(),
-			player1: crypto.randomUUID(),
-			player2: crypto.randomUUID(),
+			player1: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
+			player2: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
 			event: crypto.randomUUID(),
 			game: crypto.randomUUID()
 		};
@@ -40,8 +52,14 @@ describe('updateScoreboard and getScoreboard in tandem', () => {
 		const oldScoreboard = getScoreboard();
 		const expected: Scoreboard = {
 			round: crypto.randomUUID(),
-			player1: crypto.randomUUID(),
-			player2: crypto.randomUUID(),
+			player1: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
+			player2: {
+				name: crypto.randomUUID(),
+				score: Math.floor(Math.random() * 1000000)
+			},
 			event: crypto.randomUUID(),
 			game: crypto.randomUUID()
 		};

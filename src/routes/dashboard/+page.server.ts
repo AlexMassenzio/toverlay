@@ -9,15 +9,23 @@ export const actions = {
 		const formData = await request.formData();
 		const event = formData.get('event')?.toString() ?? '';
 		const game = formData.get('game')?.toString() ?? '';
-		const player1 = formData.get('player1')?.toString() ?? '';
-		const player2 = formData.get('player2')?.toString() ?? '';
+		const player1Name = formData.get('player1Name')?.toString() ?? '';
+		const player1Score = parseInt(formData.get('player1Score')?.toString() ?? '0');
+		const player2Name = formData.get('player2Name')?.toString() ?? '';
+		const player2Score = parseInt(formData.get('player2Score')?.toString() ?? '0');
 		const round = formData.get('round')?.toString() ?? '';
 
 		const newScoreboard: Scoreboard = {
 			event,
 			game,
-			player1,
-			player2,
+			player1: {
+				name: player1Name,
+				score: player1Score
+			},
+			player2: {
+				name: player2Name,
+				score: player2Score
+			},
 			round
 		};
 

@@ -23,8 +23,14 @@ export const getScoreboard = async () => {
 		const scoreboard: Scoreboard = {
 			event: jsonData?.event ?? '',
 			game: jsonData?.game ?? '',
-			player1: jsonData?.player1 ?? '',
-			player2: jsonData?.player2 ?? '',
+			player1: {
+				name: jsonData?.player1?.name ?? '',
+				score: jsonData?.player1?.score ?? 0
+			},
+			player2: {
+				name: jsonData?.player2?.name ?? '',
+				score: jsonData?.player2?.score ?? 0
+			},
 			round: jsonData?.round ?? ''
 		};
 		return scoreboard;
@@ -32,12 +38,19 @@ export const getScoreboard = async () => {
 		// Handle errors, e.g., file not found
 		console.error(JSON.stringify(error));
 		console.error('Could not read from file in the following location: ' + storagePath);
-		return {
+		const blankScoreboard: Scoreboard = {
 			round: '',
-			player1: '',
-			player2: '',
+			player1: {
+				name: '',
+				score: 0
+			},
+			player2: {
+				name: '',
+				score: 0
+			},
 			event: '',
 			game: ''
 		};
+		return blankScoreboard;
 	}
 };

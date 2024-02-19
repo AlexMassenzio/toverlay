@@ -4,8 +4,10 @@
 	export let scoreboard: Scoreboard;
 </script>
 
-<h1 class="p1 player-text">{scoreboard.player1}</h1>
-<h1 class="p2 player-text">{scoreboard.player2}</h1>
+<h1 class="p1 player-text">{scoreboard.player1.name}</h1>
+<h1 class="p2 player-text">{scoreboard.player2.name}</h1>
+<h1 class="score1 player-text">{scoreboard.player1.score}</h1>
+<h1 class="score2 player-text">{scoreboard.player2.score}</h1>
 <div class="team-1-box" />
 <div class="team-2-box" />
 <h3 class="team-1-name team-text">TEAM JAYTSU</h3>
@@ -14,7 +16,16 @@
 <img src="/uni2/team2PointBg.svg" class="team2PointBg" alt={null} />
 
 <style>
-	/* Rectangle */
+	.score1 {
+		position: absolute;
+		right: 1000px;
+		top: 42px;
+	}
+	.score2 {
+		position: absolute;
+		left: 1000px;
+		top: 42px;
+	}
 	.team1PointBg {
 		position: absolute;
 		width: 121px;
