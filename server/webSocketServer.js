@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
 
-// @ts-ignore
+// @ts-expect-error no easy way of getting the server type
 export const createSocketIOServer = (server) => {
 	const io = new Server(server);
 

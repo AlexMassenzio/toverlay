@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { io } from '$lib/webSocketConnection';
+	import UniCrews from '$lib/overlays/uniCrews.svelte';
 
 	export let data: PageData;
 	let scoreboard = data.scoreboard;
@@ -11,8 +12,10 @@
 	});
 </script>
 
-<div class="text-center">
+<UniCrews {scoreboard} />
+
+<!-- <div class="text-center">
 	<h1 class="text-3xl">{scoreboard.event}</h1>
 	<h2 class="text-2xl">{scoreboard.game} - {scoreboard.round}</h2>
 	<h3 class="text-xl">{scoreboard.player1} vs {scoreboard.player2}</h3>
-</div>
+</div> -->
