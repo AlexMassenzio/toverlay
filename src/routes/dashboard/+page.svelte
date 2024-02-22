@@ -1,17 +1,18 @@
 <script lang="ts">
+	import UniCrewsDashboard from '$lib/dashboardStyles/uniCrewsDashboard.svelte';
 	import type { Scoreboard } from '$lib/types/scoreboard';
 	import { io } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 	let scoreboard: Scoreboard = data.scoreboard;
-	io.emit('message', scoreboard);
+	io.emit('scoreboard', scoreboard);
 </script>
 
 <div class="h-screen w-screen bg-slate-900">
-	<form method="POST" class="mx-2 flex flex-col">
+	<form method="POST" class="mx-2 flex flex-col gap-1">
 		<div class="flex flex-col">
-			<label for="round" class="text-sm">Round</label>
+			<label for="round" class="text-sm text-slate-200">Round</label>
 			<input
 				id="round"
 				name="round"
@@ -22,7 +23,7 @@
 		</div>
 		<div class="grid grid-cols-4">
 			<div class="col-span-3 flex flex-col">
-				<label for="player1Name" class="text-sm">Player 1</label>
+				<label for="player1Name" class="text-sm text-slate-200">Player 1</label>
 				<input
 					id="player1Name"
 					name="player1Name"
@@ -32,7 +33,7 @@
 				/>
 			</div>
 			<div class="flex flex-col pl-2">
-				<label for="player1Score" class="text-sm">Score</label>
+				<label for="player1Score" class="text-sm text-slate-200">Score</label>
 				<input
 					id="player1Score"
 					name="player1Score"
@@ -44,7 +45,7 @@
 		</div>
 		<div class="grid grid-cols-4">
 			<div class="col-span-3 flex flex-col">
-				<label for="player2Name" class="text-sm">Player 2</label>
+				<label for="player2Name" class="text-sm text-slate-200">Player 2</label>
 				<input
 					id="player2Name"
 					name="player2Name"
@@ -54,7 +55,7 @@
 				/>
 			</div>
 			<div class="flex flex-col pl-2">
-				<label for="player2Score" class="text-sm">Score</label>
+				<label for="player2Score" class="text-sm text-slate-200">Score</label>
 				<input
 					id="player2Score"
 					name="player2Score"
@@ -65,7 +66,7 @@
 			</div>
 		</div>
 		<div class="flex flex-col">
-			<label for="event" class="text-sm">Event</label>
+			<label for="event" class="text-sm text-slate-200">Event</label>
 			<input
 				id="event"
 				name="event"
@@ -75,7 +76,7 @@
 			/>
 		</div>
 		<div class="flex flex-col">
-			<label for="game" class="text-sm">Game</label>
+			<label for="game" class="text-sm text-slate-200">Game</label>
 			<input
 				id="game"
 				name="game"
@@ -85,9 +86,27 @@
 			/>
 		</div>
 
+		<div class="flex flex-col">
+			<label for="overlayStyle" class="text-sm text-slate-200">Overlay Style</label>
+			<select
+				id="overlayStyle"
+				name="overlayStyle"
+				class="rounded-lg border border-slate-300 bg-slate-700 p-2 text-sm text-slate-100"
+				bind:value={scoreboard.overlayStyle}
+			>
+				<option value="default">Default</option>
+				<option value="uniCrews">UniCrews</option>
+			</select>
+		</div>
+
+		{#if scoreboard.overlayStyle == 'uniCrews'}
+			<UniCrewsDashboard {scoreboard} />
+		{/if}
+
 		<button
 			class="mt-4 w-fit self-center rounded-md border border-slate-300 bg-slate-700 p-2 text-slate-100"
-			>Update</button
 		>
+			Update
+		</button>
 	</form>
 </div>

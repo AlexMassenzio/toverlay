@@ -1,3 +1,5 @@
+import type { UniCrewsData } from './uniCrews';
+
 export type Scoreboard = {
 	round: string;
 	player1: {
@@ -10,4 +12,8 @@ export type Scoreboard = {
 	};
 	event: string;
 	game: string;
+	overlayStyle: string;
+	customData: CustomData;
 };
+
+export type CustomData = undefined | UniCrewsData;

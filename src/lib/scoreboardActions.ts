@@ -31,7 +31,9 @@ export const getScoreboard = async () => {
 				name: jsonData?.player2?.name ?? '',
 				score: jsonData?.player2?.score ?? 0
 			},
-			round: jsonData?.round ?? ''
+			round: jsonData?.round ?? '',
+			overlayStyle: jsonData?.overlayStyle ?? '',
+			customData: jsonData?.customData
 		};
 		return scoreboard;
 	} catch (error) {
@@ -49,7 +51,9 @@ export const getScoreboard = async () => {
 				score: 0
 			},
 			event: '',
-			game: ''
+			game: '',
+			overlayStyle: 'default',
+			customData: undefined
 		};
 		return blankScoreboard;
 	}

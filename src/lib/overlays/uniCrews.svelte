@@ -4,18 +4,40 @@
 	export let scoreboard: Scoreboard;
 </script>
 
-<h1 class="p1 player-text">{scoreboard.player1.name}</h1>
-<h1 class="p2 player-text">{scoreboard.player2.name}</h1>
+<h1 class="p1 player-text">{scoreboard.player1.name.toUpperCase()}</h1>
+<h1 class="p2 player-text">{scoreboard.player2.name.toUpperCase()}</h1>
 <h1 class="score1 player-text">{scoreboard.player1.score}</h1>
 <h1 class="score2 player-text">{scoreboard.player2.score}</h1>
 <div class="team-1-box" />
 <div class="team-2-box" />
-<h3 class="team-1-name team-text">TEAM JAYTSU</h3>
-<h3 class="team-2-name team-text">2UUGA GANG</h3>
+<h3 class="team-1-name team-text">{scoreboard.customData?.team1.name ?? 'team1'}</h3>
+<h3 class="team-2-name team-text">{scoreboard.customData?.team2.name ?? 'team2'}</h3>
 <img src="/uni2/team1PointBg.svg" class="team1PointBg" alt={null} />
 <img src="/uni2/team2PointBg.svg" class="team2PointBg" alt={null} />
+<h3 class="team-1-score team-score-text">{scoreboard.customData?.team1.score ?? '0'}</h3>
+<h3 class="team-2-score team-score-text">{scoreboard.customData?.team2.score ?? '0'}</h3>
 
 <style>
+	.team-1-score {
+		position: absolute;
+		left: 16px;
+		top: 116px;
+	}
+	.team-2-score {
+		position: absolute;
+		left: 1860px;
+		top: 116px;
+	}
+	.team-score-text {
+		color: rgba(245, 245, 245, 1);
+		font-family: 'Archivo Black';
+		font-style: normal;
+		font-size: 64px;
+		line-height: 1.2;
+		letter-spacing: 0px;
+		text-decoration: none;
+		text-transform: none;
+	}
 	.score1 {
 		position: absolute;
 		right: 1000px;

@@ -16,7 +16,9 @@ describe('updateScoreboard', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID()
+			game: crypto.randomUUID(),
+			overlayStyle: crypto.randomUUID(),
+			customData: undefined
 		};
 
 		const result = await updateScoreboard(expected);
@@ -37,7 +39,9 @@ describe('getScoreboard', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID()
+			game: crypto.randomUUID(),
+			overlayStyle: crypto.randomUUID(),
+			customData: undefined
 		};
 
 		await fs.writeFile(storagePath, JSON.stringify(expected, null, 2), 'utf-8');
@@ -61,7 +65,9 @@ describe('updateScoreboard and getScoreboard in tandem', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID()
+			game: crypto.randomUUID(),
+			overlayStyle: crypto.randomUUID(),
+			customData: undefined
 		};
 
 		await updateScoreboard(expected);
