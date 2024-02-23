@@ -1,4 +1,4 @@
-import type { UniCrewsData } from './uniCrews';
+import type { CrewBattle } from './crewBattle';
 
 export type Scoreboard = {
 	round: string;
@@ -16,4 +16,4 @@ export type Scoreboard = {
 	customData: CustomData;
 };
 
-export type CustomData = undefined | UniCrewsData;
+export type CustomData = undefined | CrewBattle;

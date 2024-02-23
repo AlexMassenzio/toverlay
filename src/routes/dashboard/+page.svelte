@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UniCrewsDashboard from '$lib/dashboardStyles/uniCrewsDashboard.svelte';
+	import CrewBattleDashboard from '$lib/dashboardStyles/crewBattleDashboard.svelte';
 	import type { Scoreboard } from '$lib/types/scoreboard';
 	import { io } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
@@ -100,7 +100,7 @@
 		</div>
 
 		{#if scoreboard.overlayStyle == 'uniCrews'}
-			<UniCrewsDashboard {scoreboard} />
+			<CrewBattleDashboard {scoreboard} />
 		{/if}
 
 		<button

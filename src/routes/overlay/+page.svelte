@@ -13,4 +13,6 @@
 	});
 </script>
 
-<UniCrews {scoreboard} />
+{#if scoreboard.overlayStyle == 'uniCrews'}
+	<UniCrews {scoreboard} />
+{/if}

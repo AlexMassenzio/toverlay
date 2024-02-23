@@ -1,4 +1,4 @@
-export type UniCrewsData = {
+export type CrewBattle = {
 	team1: {
 		name: string;
 		score: number;

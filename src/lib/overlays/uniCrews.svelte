@@ -14,8 +14,8 @@
 <h3 class="team-2-name team-text">{scoreboard.customData?.team2.name ?? 'team2'}</h3>
 <img src="/uni2/team1PointBg.svg" class="team1PointBg" alt={null} />
 <img src="/uni2/team2PointBg.svg" class="team2PointBg" alt={null} />
-<h3 class="team-1-score team-score-text">{scoreboard.customData?.team1.score ?? '0'}</h3>
-<h3 class="team-2-score team-score-text">{scoreboard.customData?.team2.score ?? '0'}</h3>
+<h3 class="team-1-score team-score-text">{scoreboard.customData?.team1.score ?? '-1'}</h3>
+<h3 class="team-2-score team-score-text">{scoreboard.customData?.team2.score ?? '-1'}</h3>
 
 <style>
 	.team-1-score {
