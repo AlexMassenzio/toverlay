@@ -7,7 +7,7 @@ export const createSocketIOServer = (server) => {
 
 	io.on('connection', (socket) => {
 		socket.on('scoreboard', (scoreboard: Scoreboard) => {
-			let now = new Date();
+			const now = new Date();
 			console.log(
 				'Scoreboard Updated at ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
 			);
