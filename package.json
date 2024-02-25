@@ -3,15 +3,16 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"start": "node ./server",
-		"test": "vitest",
+		"dev": "vite dev",
+		"format": "prettier --write .",
+		"flint": "pnpm format && pnpm lint",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"preview": "vite preview",
+		"start": "node ./server",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
