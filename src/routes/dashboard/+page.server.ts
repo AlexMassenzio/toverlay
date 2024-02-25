@@ -1,4 +1,6 @@
+import { convertToOverlayStyle } from '$lib/overlayStylesUtil';
 import { getScoreboard, updateScoreboard } from '$lib/scoreboardActions';
+import { OVERLAY_STYLES, type OverlayStyles } from '$lib/types/overlayStles';
 import type { CustomData, Scoreboard } from '$lib/types/scoreboard';
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
@@ -13,11 +15,12 @@ export const actions = {
 		const player2Name = formData.get('player2Name')?.toString() ?? '';
 		const player2Score = parseInt(formData.get('player2Score')?.toString() ?? '0');
 		const round = formData.get('round')?.toString() ?? '';
-		const overlayStyle = formData.get('overlayStyle')?.toString() ?? '';
+		let overlayStyleFormData = formData.get('overlayStyle')?.toString() ?? '';
+		const overlayStyle = convertToOverlayStyle(overlayStyleFormData);
 
 		let customData: CustomData;
 
-		if (overlayStyle == 'uniCrews') {
+		if (overlayStyle == OVERLAY_STYLES.UNICREWS) {
 			customData = {
 				team1: {
 					name: formData.get('team1Name')?.toString() ?? '',

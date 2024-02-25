@@ -3,6 +3,7 @@
 	import { io } from '$lib/webSocketConnection';
 	import UniCrews from '$lib/overlays/uniCrews.svelte';
 	import type { Scoreboard } from '$lib/types/scoreboard';
+	import { OVERLAY_STYLES } from '$lib/types/overlayStles';
 
 	export let data: PageData;
 	let scoreboard = data.scoreboard;
@@ -13,6 +14,6 @@
 	});
 </script>
 
-{#if scoreboard.overlayStyle == 'uniCrews'}
+{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNICREWS}
 	<UniCrews {scoreboard} />
 {/if}

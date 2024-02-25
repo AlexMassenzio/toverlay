@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CrewBattleDashboard from '$lib/dashboardStyles/crewBattleDashboard.svelte';
+	import { OVERLAY_STYLES } from '$lib/types/overlayStles';
 	import type { Scoreboard } from '$lib/types/scoreboard';
 	import { io } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
@@ -94,12 +95,13 @@
 				class="rounded-lg border border-slate-300 bg-slate-700 p-2 text-sm text-slate-100"
 				bind:value={scoreboard.overlayStyle}
 			>
-				<option value="default">Default</option>
-				<option value="uniCrews">UniCrews</option>
+				{#each Object.values(OVERLAY_STYLES) as overlayStyle}
+					<option value={overlayStyle}>{overlayStyle}</option>
+				{/each}
 			</select>
 		</div>
 
-		{#if scoreboard.overlayStyle == 'uniCrews'}
+		{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNICREWS}
 			<CrewBattleDashboard {scoreboard} />
 		{/if}
 
