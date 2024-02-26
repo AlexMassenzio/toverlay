@@ -2,6 +2,7 @@ import type { Scoreboard } from './types/scoreboard';
 import fs from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
+import { OVERLAY_STYLES } from './types/overlayStles';
 
 const fileName = process.env.VITEST_POOL_ID ? 'testData.json' : 'data.json';
 export const storagePath = path.resolve(process.cwd(), fileName);
@@ -32,7 +33,7 @@ export const getScoreboard = async () => {
 				score: jsonData?.player2?.score ?? 0
 			},
 			round: jsonData?.round ?? '',
-			overlayStyle: jsonData?.overlayStyle ?? '',
+			overlayStyle: jsonData?.overlayStyle ?? OVERLAY_STYLES.DEFUALT,
 			customData: jsonData?.customData
 		};
 		return scoreboard;
@@ -52,7 +53,7 @@ export const getScoreboard = async () => {
 			},
 			event: '',
 			game: '',
-			overlayStyle: 'default',
+			overlayStyle: OVERLAY_STYLES.DEFUALT,
 			customData: undefined
 		};
 		return blankScoreboard;
