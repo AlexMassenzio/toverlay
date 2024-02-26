@@ -4,7 +4,7 @@ import { existsSync } from 'fs';
 import path from 'path';
 import { OVERLAY_STYLES } from './types/overlayStles';
 
-const fileName = process.env.VITEST_POOL_ID ? 'testData.json' : 'data.json';
+const fileName = process.env.VITEST_POOL_ID ? 'data.test.json' : 'data.json';
 export const storagePath = path.resolve(process.cwd(), fileName);
 
 export const updateScoreboard = async (newScoreboard: Scoreboard) => {
