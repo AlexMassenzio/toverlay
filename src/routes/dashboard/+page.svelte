@@ -101,7 +101,7 @@
 			</select>
 		</div>
 
-		{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNICREWS}
+		{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNI_CREWS}
 			<CrewBattleDashboard {scoreboard} />
 		{/if}
 

@@ -4,6 +4,7 @@
 	import UniCrews from '$lib/overlays/uniCrews.svelte';
 	import type { Scoreboard } from '$lib/types/scoreboard';
 	import { OVERLAY_STYLES } from '$lib/types/overlayStles';
+	import FightCard from '$lib/overlays/fightCard.svelte';
 
 	export let data: PageData;
 	let scoreboard = data.scoreboard;
@@ -14,6 +15,8 @@
 	});
 </script>
 
-{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNICREWS}
+{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNI_CREWS}
 	<UniCrews {scoreboard} />
+{:else if scoreboard.overlayStyle == OVERLAY_STYLES.FIGHT_CARD}
+	<FightCard />
 {/if}

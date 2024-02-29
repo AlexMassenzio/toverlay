@@ -15,6 +15,9 @@ const webSocketServer = {
 
 export default defineConfig({
 	plugins: [sveltekit(), webSocketServer],
+	ssr: {
+		noExternal: ['three']
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}

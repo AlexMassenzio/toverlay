@@ -20,7 +20,7 @@ export const actions = {
 
 		let customData: CustomData;
 
-		if (overlayStyle == OVERLAY_STYLES.UNICREWS) {
+		if (overlayStyle == OVERLAY_STYLES.UNI_CREWS) {
 			customData = {
 				team1: {
 					name: formData.get('team1Name')?.toString() ?? '',

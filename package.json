@@ -43,7 +43,11 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@types/express": "^4.17.21",
+		"three": "^0.159.0",
+		"@threlte/core": "^7.1.2",
+		"@threlte/extras": "^8.8.1",
+		"@threlte/theatre": "^2.1.6",
+		"@theatre/core": "^0.7.0",
 		"express": "^4.18.2"
 	}
 }

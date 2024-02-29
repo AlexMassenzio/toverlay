@@ -5,8 +5,8 @@ import type { OverlayStyles } from './types/overlayStles';
 
 describe('convertToOverlayStyle', () => {
 	it('should return an overlay style from a valid string', async () => {
-		const validOverlayStyle = OVERLAY_STYLES.UNICREWS;
-		const expected: OverlayStyles = OVERLAY_STYLES.UNICREWS;
+		const validOverlayStyle = OVERLAY_STYLES.UNI_CREWS;
+		const expected: OverlayStyles = OVERLAY_STYLES.UNI_CREWS;
 
 		const result = convertToOverlayStyle(validOverlayStyle);
 		expect(result).toEqual(expected);
