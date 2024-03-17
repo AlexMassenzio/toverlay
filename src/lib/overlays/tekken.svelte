@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { defualtTransitionConfig } from '$lib/transitionConfigs';
 	import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 	import type { Scoreboard } from '$lib/types/scoreboard';
+	import { fade } from 'svelte/transition';
 
 	export let scoreboard: Scoreboard;
 </script>
@@ -10,14 +12,16 @@
 <h1 class="score1 player-text">{scoreboard.player1.score}</h1>
 <h1 class="score2 player-text">{scoreboard.player2.score}</h1>
 {#if scoreboard.overlayStyle == OVERLAY_STYLES.CREWS}
-	<div class="team-1-box" />
-	<div class="team-2-box" />
-	<h3 class="team-1-name team-text">{scoreboard.customData?.team1.name ?? 'team1'}</h3>
-	<h3 class="team-2-name team-text">{scoreboard.customData?.team2.name ?? 'team2'}</h3>
-	<img src="/uni2/team1PointBg.svg" class="team1PointBg" alt={null} />
-	<img src="/uni2/team2PointBg.svg" class="team2PointBg" alt={null} />
-	<h3 class="team-1-score team-score-text">{scoreboard.customData?.team1.score ?? '-1'}</h3>
-	<h3 class="team-2-score team-score-text">{scoreboard.customData?.team2.score ?? '-1'}</h3>
+	<section transition:fade={defualtTransitionConfig}>
+		<div class="team-1-box" />
+		<div class="team-2-box" />
+		<h3 class="team-1-name team-text">{scoreboard.customData?.team1.name ?? 'team1'}</h3>
+		<h3 class="team-2-name team-text">{scoreboard.customData?.team2.name ?? 'team2'}</h3>
+		<img src="/uni2/team1PointBg.svg" class="team1PointBg" alt={null} />
+		<img src="/uni2/team2PointBg.svg" class="team2PointBg" alt={null} />
+		<h3 class="team-1-score team-score-text">{scoreboard.customData?.team1.score ?? '-1'}</h3>
+		<h3 class="team-2-score team-score-text">{scoreboard.customData?.team2.score ?? '-1'}</h3>
+	</section>
 {/if}
 
 <style>

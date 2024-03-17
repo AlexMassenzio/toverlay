@@ -7,6 +7,8 @@
 	import { GAMES } from '$lib/types/game';
 	import Uni from '$lib/overlays/uni.svelte';
 	import Tekken from '$lib/overlays/tekken.svelte';
+	import { fade } from 'svelte/transition';
+	import { defualtTransitionConfig } from '$lib/transitionConfigs';
 
 	export let data: PageData;
 	let scoreboard = data.scoreboard;
@@ -18,9 +20,13 @@
 </script>
 
 {#if scoreboard.game == GAMES.UNI}
-	<Uni {scoreboard} />
+	<section transition:fade={defualtTransitionConfig}>
+		<Uni {scoreboard} />
+	</section>
 {:else if scoreboard.game == GAMES.TEKKEN}
-	<Tekken {scoreboard} />
+	<section transition:fade={defualtTransitionConfig}>
+		<Tekken {scoreboard} />
+	</section>
 {:else if scoreboard.overlayStyle == OVERLAY_STYLES.FIGHT_CARD}
 	<FightCard />
 {/if}
