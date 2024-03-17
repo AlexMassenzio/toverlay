@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CrewBattleDashboard from '$lib/dashboardStyles/crewBattleDashboard.svelte';
-	import { OVERLAY_STYLES } from '$lib/types/overlayStles';
+	import { GAMES } from '$lib/types/game';
+	import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 	import type { Scoreboard } from '$lib/types/scoreboard';
 	import { io } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
@@ -78,13 +79,16 @@
 		</div>
 		<div class="flex flex-col">
 			<label for="game" class="text-sm text-slate-200">Game</label>
-			<input
+			<select
 				id="game"
 				name="game"
-				type="text"
-				value={scoreboard?.game ?? ''}
 				class="rounded-lg border border-slate-300 bg-slate-700 p-2 text-sm text-slate-100"
-			/>
+				bind:value={scoreboard.game}
+			>
+				{#each Object.values(GAMES) as game}
+					<option value={game}>{game}</option>
+				{/each}
+			</select>
 		</div>
 
 		<div class="flex flex-col">
@@ -101,7 +105,7 @@
 			</select>
 		</div>
 
-		{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNI_CREWS}
+		{#if scoreboard.overlayStyle == OVERLAY_STYLES.CREWS}
 			<CrewBattleDashboard {scoreboard} />
 		{/if}
 

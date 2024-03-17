@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { io } from '$lib/webSocketConnection';
-	import UniCrews from '$lib/overlays/uniCrews.svelte';
 	import type { Scoreboard } from '$lib/types/scoreboard';
-	import { OVERLAY_STYLES } from '$lib/types/overlayStles';
+	import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 	import FightCard from '$lib/overlays/fightCard.svelte';
+	import { GAMES } from '$lib/types/game';
+	import Uni from '$lib/overlays/uni.svelte';
+	import Tekken from '$lib/overlays/tekken.svelte';
 
 	export let data: PageData;
 	let scoreboard = data.scoreboard;
@@ -15,8 +17,10 @@
 	});
 </script>
 
-{#if scoreboard.overlayStyle == OVERLAY_STYLES.UNI_CREWS}
-	<UniCrews {scoreboard} />
+{#if scoreboard.game == GAMES.UNI}
+	<Uni {scoreboard} />
+{:else if scoreboard.game == GAMES.TEKKEN}
+	<Tekken {scoreboard} />
 {:else if scoreboard.overlayStyle == OVERLAY_STYLES.FIGHT_CARD}
 	<FightCard />
 {/if}

@@ -1,6 +1,7 @@
-import { convertToOverlayStyle } from '$lib/overlayStylesUtil';
+import { convertToGame } from '$lib/gameUtil';
+import { convertToOverlayStyle } from '$lib/overlayStyleUtil';
 import { getScoreboard, updateScoreboard } from '$lib/scoreboardActions';
-import { OVERLAY_STYLES } from '$lib/types/overlayStles';
+import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 import type { CustomData, Scoreboard } from '$lib/types/scoreboard';
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
@@ -9,7 +10,8 @@ export const actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 		const event = formData.get('event')?.toString() ?? '';
-		const game = formData.get('game')?.toString() ?? '';
+		const gameFormData = formData.get('game')?.toString() ?? '';
+		const game = convertToGame(gameFormData);
 		const player1Name = formData.get('player1Name')?.toString() ?? '';
 		const player1Score = parseInt(formData.get('player1Score')?.toString() ?? '0');
 		const player2Name = formData.get('player2Name')?.toString() ?? '';
@@ -20,7 +22,7 @@ export const actions = {
 
 		let customData: CustomData;
 
-		if (overlayStyle == OVERLAY_STYLES.UNI_CREWS) {
+		if (overlayStyle == OVERLAY_STYLES.CREWS) {
 			customData = {
 				team1: {
 					name: formData.get('team1Name')?.toString() ?? '',

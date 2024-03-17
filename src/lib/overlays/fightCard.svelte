@@ -2,7 +2,7 @@
 	import { Canvas } from '@threlte/core';
 	import { T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
-	import { Project, Sequence, Sheet, SheetObject, Studio, Theatre } from '@threlte/theatre';
+	import { Project, Sequence, Sheet, SheetObject, Studio } from '@threlte/theatre';
 	import state from '$lib/assets/state.json';
 </script>
 

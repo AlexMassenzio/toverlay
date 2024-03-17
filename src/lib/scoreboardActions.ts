@@ -2,7 +2,8 @@ import type { Scoreboard } from './types/scoreboard';
 import fs from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
-import { OVERLAY_STYLES } from './types/overlayStles';
+import { OVERLAY_STYLES } from './types/overlayStyle';
+import { GAMES } from './types/game';
 
 const fileName = process.env.VITEST_POOL_ID ? 'data.test.json' : 'data.json';
 export const storagePath = path.resolve(process.cwd(), fileName);
@@ -23,7 +24,7 @@ export const getScoreboard = async () => {
 		const jsonData = JSON.parse(fileData);
 		const scoreboard: Scoreboard = {
 			event: jsonData?.event ?? '',
-			game: jsonData?.game ?? '',
+			game: jsonData?.game ?? GAMES.DEFAULT,
 			player1: {
 				name: jsonData?.player1?.name ?? '',
 				score: jsonData?.player1?.score ?? 0
@@ -33,7 +34,7 @@ export const getScoreboard = async () => {
 				score: jsonData?.player2?.score ?? 0
 			},
 			round: jsonData?.round ?? '',
-			overlayStyle: jsonData?.overlayStyle ?? OVERLAY_STYLES.DEFUALT,
+			overlayStyle: jsonData?.overlayStyle ?? OVERLAY_STYLES.DEFAULT,
 			customData: jsonData?.customData
 		};
 		return scoreboard;
@@ -52,8 +53,8 @@ export const getScoreboard = async () => {
 				score: 0
 			},
 			event: '',
-			game: '',
-			overlayStyle: OVERLAY_STYLES.DEFUALT,
+			game: GAMES.DEFAULT,
+			overlayStyle: OVERLAY_STYLES.DEFAULT,
 			customData: undefined
 		};
 		return blankScoreboard;

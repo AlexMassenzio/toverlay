@@ -1,5 +1,6 @@
 import type { CrewBattle } from './crewBattle';
-import type { OverlayStyles } from './overlayStles';
+import type { Game } from './game';
+import type { OverlayStyle } from './overlayStyle';
 
 export type Scoreboard = {
 	round: string;
@@ -12,8 +13,8 @@ export type Scoreboard = {
 		score: number;
 	};
 	event: string;
-	game: string;
-	overlayStyle: OverlayStyles;
+	game: Game;
+	overlayStyle: OverlayStyle;
 	customData: CustomData;
 };
 

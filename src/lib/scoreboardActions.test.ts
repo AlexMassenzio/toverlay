@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import type { Scoreboard } from './types/scoreboard';
 import { getScoreboard, storagePath, updateScoreboard } from './scoreboardActions';
 import fs from 'fs/promises';
-import { OVERLAY_STYLES } from './types/overlayStles';
+import { OVERLAY_STYLES } from './types/overlayStyle';
+import { GAMES } from './types/game';
 
 describe('updateScoreboard', () => {
 	it('should update and return all values', async () => {
@@ -17,8 +18,8 @@ describe('updateScoreboard', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID(),
-			overlayStyle: OVERLAY_STYLES.DEFUALT,
+			game: GAMES.DEFAULT,
+			overlayStyle: OVERLAY_STYLES.DEFAULT,
 			customData: undefined
 		};
 
@@ -40,8 +41,8 @@ describe('getScoreboard', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID(),
-			overlayStyle: OVERLAY_STYLES.DEFUALT,
+			game: GAMES.DEFAULT,
+			overlayStyle: OVERLAY_STYLES.DEFAULT,
 			customData: undefined
 		};
 
@@ -66,8 +67,8 @@ describe('updateScoreboard and getScoreboard in tandem', () => {
 				score: Math.floor(Math.random() * 1000000)
 			},
 			event: crypto.randomUUID(),
-			game: crypto.randomUUID(),
-			overlayStyle: OVERLAY_STYLES.DEFUALT,
+			game: GAMES.DEFAULT,
+			overlayStyle: OVERLAY_STYLES.DEFAULT,
 			customData: undefined
 		};
 
