@@ -4,7 +4,7 @@
 	import { GAMES } from '$lib/types/game';
 	import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 	import type { Scoreboard } from '$lib/types/scoreboard';
-	import { io } from '$lib/webSocketConnection';
+	import { io, obs } from '$lib/webSocketConnection';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -27,10 +27,40 @@
 		};
 		io.emit('action', action);
 	};
+
+	const startMatch = async () => {
+		await obs.call('StartRecord');
+	};
+
+	const endMatch = async () => {
+		const recordedFilePath = (await obs.call('StopRecord')).outputPath;
+
+		await fetch('/api/recordings', {
+			method: 'POST',
+			body: JSON.stringify({ storagePath: recordedFilePath, scoreboard }),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+
+		scoreboard.player1 = {
+			name: '',
+			score: 0
+		};
+		scoreboard.player2 = {
+			name: '',
+			score: 0
+		};
+
+		// TODO: This is very hacky, properly wait for form values to update in the DOM.
+		await new Promise((resolve) => setTimeout(resolve, 250));
+
+		(<HTMLFormElement>document.getElementById('dashboardForm'))?.submit();
+	};
 </script>
 
 <div class="h-screen w-screen bg-slate-900">
-	<form method="POST" class="mx-2 flex flex-col gap-1">
+	<form id="dashboardForm" method="POST" class="mx-2 flex flex-col gap-1">
 		<div class="flex flex-col">
 			<label for="round" class="text-sm text-slate-200">Round</label>
 			<input
@@ -67,7 +97,7 @@
 				<button
 					type="button"
 					on:click={() => handlePlayerAction(1)}
-					class="h-full rounded-md border border-slate-300 bg-slate-700 text-slate-100"
+					class="h-full rounded-md border border-slate-300 bg-slate-700 text-slate-100 hover:bg-slate-800"
 				>
 					❌
 				</button>
@@ -99,7 +129,7 @@
 				<button
 					type="button"
 					on:click={() => handlePlayerAction(2)}
-					class="h-full rounded-md border border-slate-300 bg-slate-700 text-slate-100"
+					class="h-full rounded-md border border-slate-300 bg-slate-700 text-slate-100 hover:bg-slate-800"
 				>
 					❌
 				</button>
@@ -146,12 +176,27 @@
 		{#if scoreboard.overlayStyle == OVERLAY_STYLES.CREWS}
 			<CrewBattleDashboard {scoreboard} />
 		{/if}
-
-		<button
-			class="mt-4 w-fit self-center rounded-md border border-slate-300 bg-slate-700 p-2 text-slate-100"
-			type="submit"
-		>
-			Update
-		</button>
+		<div class="flex justify-center gap-1">
+			<button
+				class="mt-4 w-fit self-center rounded-md border border-green-500 bg-slate-700 p-2 text-green-500 hover:bg-slate-800"
+				type="button"
+				on:click={startMatch}
+			>
+				Start Match
+			</button>
+			<button
+				class="mt-4 w-fit self-center rounded-md border border-slate-300 bg-slate-700 p-2 text-slate-100 hover:bg-slate-800"
+				type="submit"
+			>
+				Update
+			</button>
+			<button
+				class="mt-4 w-fit self-center rounded-md border border-red-500 bg-slate-700 p-2 text-red-500 hover:bg-slate-800"
+				type="button"
+				on:click={endMatch}
+			>
+				End Match
+			</button>
+		</div>
 	</form>
 </div>
