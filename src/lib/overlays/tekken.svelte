@@ -1,16 +1,40 @@
 <script lang="ts">
-	import { defualtTransitionConfig } from '$lib/transitionConfigs';
+	import { defualtTransitionConfig, playerCrossoutAnimation } from '$lib/transitionConfigs';
+	import type { Action } from '$lib/types/action';
 	import { OVERLAY_STYLES } from '$lib/types/overlayStyle';
 	import type { Scoreboard } from '$lib/types/scoreboard';
+	import { io } from '$lib/webSocketConnection';
 	import { fade } from 'svelte/transition';
 
 	export let scoreboard: Scoreboard;
+	let killedPlayer = 0;
+
+	io.on('action', (action: Action) => {
+		console.log('something happened');
+		if (action.type == 'NAME_CROSSOUT') {
+			killedPlayer = action.payload.player;
+		}
+	});
 </script>
 
-<h1 class="p1 player-text">{scoreboard.player1.name.toUpperCase()}</h1>
-<h1 class="p2 player-text">{scoreboard.player2.name.toUpperCase()}</h1>
-<h1 class="score1 player-text">{scoreboard.player1.score}</h1>
-<h1 class="score2 player-text">{scoreboard.player2.score}</h1>
+{#if killedPlayer != 1}
+	<h1 class="p1 player-text" in:fade={defualtTransitionConfig} out:playerCrossoutAnimation>
+		{scoreboard.player1.name.toUpperCase()}
+	</h1>
+	<h1 class="score1 player-text" in:fade={defualtTransitionConfig} out:playerCrossoutAnimation>
+		{scoreboard.player1.score}
+	</h1>
+{/if}
+
+{#if killedPlayer != 2}
+	<h1 class="p2 player-text" in:fade={defualtTransitionConfig} out:playerCrossoutAnimation>
+		{scoreboard.player2.name.toUpperCase()}
+	</h1>
+	<h1 class="score2 player-text" in:fade={defualtTransitionConfig} out:playerCrossoutAnimation>
+		{scoreboard.player2.score}
+	</h1>
+{/if}
+
 {#if scoreboard.overlayStyle == OVERLAY_STYLES.CREWS}
 	<section transition:fade={defualtTransitionConfig}>
 		<div class="team-1-box" />
@@ -26,12 +50,12 @@
 
 <style>
 	.team-1-score {
-		position: absolute;
+		position: fixed;
 		left: 16px;
 		top: 116px;
 	}
 	.team-2-score {
-		position: absolute;
+		position: fixed;
 		left: 1860px;
 		top: 116px;
 	}
@@ -46,36 +70,36 @@
 		text-transform: none;
 	}
 	.score1 {
-		position: absolute;
+		position: fixed;
 		right: 1100px;
 		top: 12px;
 	}
 	.score2 {
-		position: absolute;
+		position: fixed;
 		left: 1100px;
 		top: 12px;
 	}
 	.team1PointBg {
-		position: absolute;
+		position: fixed;
 		width: 121px;
 		height: 118px;
 		left: 0px;
 		top: 96px;
 	}
 	.team2PointBg {
-		position: absolute;
+		position: fixed;
 		width: 120px;
 		height: 118px;
 		left: 1800px;
 		top: 96px;
 	}
 	.p1 {
-		position: absolute;
+		position: fixed;
 		right: 1142px;
 		top: 12px;
 	}
 	.p2 {
-		position: absolute;
+		position: fixed;
 		left: 1142px;
 		top: 12px;
 	}
@@ -92,7 +116,7 @@
 		text-transform: none;
 	}
 	.team-1-box {
-		position: absolute;
+		position: fixed;
 		width: 555px;
 		height: 26px;
 		left: 144px;
@@ -102,7 +126,7 @@
 		border: 2px solid rgba(179, 179, 179, 1);
 	}
 	.team-1-name {
-		position: absolute;
+		position: fixed;
 		width: 400px;
 		height: 23px;
 		left: 307px;
@@ -110,7 +134,7 @@
 		color: rgba(245, 245, 245, 1);
 	}
 	.team-2-name {
-		position: absolute;
+		position: fixed;
 		width: 400px;
 		height: 23px;
 		left: 1464px;
@@ -129,7 +153,7 @@
 		text-transform: none;
 	}
 	.team-2-box {
-		position: absolute;
+		position: fixed;
 		width: 555px;
 		height: 26px;
 		left: 1224px;

@@ -1,3 +1,4 @@
+import type { Action } from '$lib/types/action';
 import type { Scoreboard } from '$lib/types/scoreboard';
 import { Server } from 'socket.io';
 
@@ -13,6 +14,14 @@ export const createSocketIOServer = (server) => {
 			);
 			console.log(scoreboard);
 			io.emit('scoreboard', scoreboard);
+		});
+		socket.on('action', (action: Action) => {
+			const now = new Date();
+			console.log(
+				'Action requested at ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+			);
+			console.log(action);
+			io.emit('action', action);
 		});
 	});
 };
