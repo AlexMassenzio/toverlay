@@ -7,6 +7,7 @@
 	import { GAMES } from '$lib/types/game';
 	import Uni from '$lib/overlays/uni.svelte';
 	import Tekken from '$lib/overlays/tekken.svelte';
+	import GBVSR from '$lib/overlays/gbvsr.svelte';
 	import { fade } from 'svelte/transition';
 	import { defualtTransitionConfig } from '$lib/transitionConfigs';
 
@@ -26,6 +27,10 @@
 {:else if scoreboard.game == GAMES.TEKKEN}
 	<section transition:fade={defualtTransitionConfig}>
 		<Tekken {scoreboard} />
+	</section>
+{:else if scoreboard.game == GAMES.GBVSR}
+	<section transition:fade={defualtTransitionConfig}>
+		<GBVSR {scoreboard} />
 	</section>
 {:else if scoreboard.overlayStyle == OVERLAY_STYLES.FIGHT_CARD}
 	<FightCard />
